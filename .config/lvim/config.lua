@@ -134,7 +134,6 @@ lvim.plugins = {
   { "jparise/vim-graphql" },
   { "avneesh0612/react-nextjs-snippets" },
   { "andweeb/presence.nvim" },
-  { "scrooloose/nerdcommenter" },
   { "dag/vim-fish" },
   { "ekalinin/dockerfile.vim" },
   { "wakatime/vim-wakatime" }
