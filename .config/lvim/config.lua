@@ -1,6 +1,6 @@
 -- general
 lvim.log.level = "warn"
-lvim.format_on_save = true
+lvim.format_on_save = false
 lvim.colorscheme = "darkplus"
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
@@ -71,6 +71,8 @@ lvim.builtin.nvimtree.show_icons.git = 0
 -- code snippets
 lvim.vsnip_dir = "./snippets"
 
+lvim.lsp.automatic_servers_installation = true
+
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
@@ -85,6 +87,7 @@ lvim.builtin.treesitter.ensure_installed = {
   "rust",
   "java",
   "yaml",
+  "markdown"
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -136,5 +139,10 @@ lvim.plugins = {
   { "andweeb/presence.nvim" },
   { "dag/vim-fish" },
   { "ekalinin/dockerfile.vim" },
-  { "wakatime/vim-wakatime" }
+  { "wakatime/vim-wakatime" },
+  { "wfxr/minimap.vim" },
+  { "mattn/emmet-vim" },
+  { "iamcco/coc-tailwindcss" },
+  { "pantharshit00/vim-prisma" },
+  { "tpope/vim-dotenv" }
 }
