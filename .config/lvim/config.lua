@@ -1,7 +1,7 @@
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = false
-lvim.colorscheme = "darkplus"
+lvim.colorscheme = "tokyonight-night"
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -61,7 +61,7 @@ local time = os.date("%A, %d %B %Y")
 
 lvim.builtin.alpha.dashboard.section.footer.val = "@carrotfarmer\n" .. time
 
-lvim.builtin.notify.active = true
+-- lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.terminal.direction = "horizontal"
 lvim.builtin.terminal.persist_size = true
@@ -92,6 +92,10 @@ lvim.builtin.treesitter.ensure_installed = {
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
+
+require 'nvim-web-devicons'.setup {
+  default = true;
+}
 
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
@@ -140,9 +144,17 @@ lvim.plugins = {
   { "dag/vim-fish" },
   { "ekalinin/dockerfile.vim" },
   { "wakatime/vim-wakatime" },
-  { "wfxr/minimap.vim" },
+  {
+    "wfxr/minimap.vim",
+    config = function()
+      vim.cmd("let g:minimap_width = 10")
+      vim.cmd("let g:minimap_auto_start = 1")
+      vim.cmd("let g:minimap_auto_start_win_enter = 1")
+    end
+  },
   { "mattn/emmet-vim" },
   { "iamcco/coc-tailwindcss" },
   { "pantharshit00/vim-prisma" },
-  { "tpope/vim-dotenv" }
+  { "tpope/vim-dotenv" },
+  { "github/copilot.vim" },
 }
