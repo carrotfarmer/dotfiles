@@ -66,7 +66,6 @@ lvim.builtin.terminal.active = true
 lvim.builtin.terminal.direction = "horizontal"
 lvim.builtin.terminal.persist_size = true
 lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 0
 
 -- code snippets
 lvim.vsnip_dir = "./snippets"
@@ -157,4 +156,15 @@ lvim.plugins = {
   { "pantharshit00/vim-prisma" },
   { "tpope/vim-dotenv" },
   { "github/copilot.vim" },
+  {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  },
 }
