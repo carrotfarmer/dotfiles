@@ -1,7 +1,9 @@
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = false
-lvim.colorscheme = "tokyonight-night"
+lvim.colorscheme = "material"
+
+vim.g.material_style = "deep ocean"
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -86,10 +88,11 @@ lvim.builtin.treesitter.ensure_installed = {
   "rust",
   "java",
   "yaml",
-  "markdown"
+  "markdown",
+  "haskell",
+  "astro"
 }
 
-lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
 require 'nvim-web-devicons'.setup {
@@ -104,6 +107,20 @@ formatters.setup {
     args = { "--print-width", "100" },
     filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact", "json" },
   },
+}
+
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  {
+    command = "eslint",
+    fileTypes = "typescript, typescriptreact, javascript, javascriptreact"
+  }
+}
+
+lvim.format_on_save = true
+lvim.format_on_save = {
+  pattern = { "*.lua", "*.py", "*.ts", "*.tsx", "*.js", "*.jsx", "*.mjs", "*.astro", "*.html", "*.css", "*.c", "*.cpp",
+    "*.rs" }
 }
 
 lvim.plugins = {
@@ -136,6 +153,7 @@ lvim.plugins = {
   },
   { "lunarvim/colorschemes" },
   { "folke/tokyonight.nvim" },
+  { "ellisonleao/gruvbox.nvim" },
   { "junegunn/rainbow_parentheses.vim" },
   { "jparise/vim-graphql" },
   { "avneesh0612/react-nextjs-snippets" },
@@ -187,32 +205,54 @@ lvim.plugins = {
       })
     end
   },
-}
-
-lvim.autocommands = {
-  {
-    { "BufEnter", "Filetype" },
-    {
-      desc = "Open mini.map and exclude some filetypes",
-      pattern = { "*" },
-      callback = function()
-        local exclude_ft = {
-          "qf",
-          "NvimTree",
-          "toggleterm",
-          "TelescopePrompt",
-          "alpha",
-          "netrw",
-        }
-
-        local map = require('mini.map')
-        if vim.tbl_contains(exclude_ft, vim.o.filetype) then
-          vim.b.minimap_disable = true
-          map.close()
-        elseif vim.o.buftype == "" then
-          map.open()
-        end
-      end,
-    },
+  { "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+    ft = { "markdown" },
   },
+  { "MunifTanjim/eslint.nvim" },
+  {
+    'mrcjkb/haskell-tools.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim', -- optional
+    },
+    branch = '1.x.x', -- recommended
+  },
+  {
+    "wuelnerdotexe/vim-astro",
+    config = function()
+      local astro_typescript = "enable"
+    end
+  },
+  { "sainnhe/everforest" },
+  { "marko-cerovac/material.nvim" },
 }
+
+-- lvim.autocommands = {
+--   {
+--     { "BufEnter", "Filetype" },
+--     {
+--       desc = "Open mini.map and exclude some filetypes",
+--       pattern = { "*" },
+--       callback = function()
+--         local exclude_ft = {
+--           "qf",
+--           "NvimTree",
+--           "toggleterm",
+--           "TelescopePrompt",
+--           "alpha",
+--           "netrw",
+--         }
+
+--         local map = require('mini.map')
+--         if vim.tbl_contains(exclude_ft, vim.o.filetype) then
+--           vim.b.minimap_disable = true
+--           map.close()
+--         elseif vim.o.buftype == "" then
+--           map.open()
+--         end
+--       end,
+--     },
+--   },
+-- }
